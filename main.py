@@ -12,7 +12,7 @@ st.write("Data from ESC-50 Dataset")
 st.image("Capture.png")
 
 
-input_file = st.file_uploader('Upload a .wav file')
+input_file = st.file_uploader('Upload a .wav file - Recommend > 2 seconds long')
 st.write("Verify your input sound")
 st.audio(input_file)
 
