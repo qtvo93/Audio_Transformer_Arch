@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 st.header("Pretrained Audio Transformer to Classify Air Acoustic Sounds")
 st.title("Current Trained Classes:")
 st.write("Data from ESC-50 Dataset")
-st.image("Capture.png")
+st.image("Capture.PNG")
 
 
 input_file = st.file_uploader('Upload a .wav file - Recommend > 5 seconds long')
