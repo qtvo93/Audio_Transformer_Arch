@@ -1,0 +1,4 @@
+name: audio-transformer
+channels:
+  - defaults
+prefix: C:\ProgramData\Anaconda3\envs\audio-transformer
