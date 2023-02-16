@@ -89,7 +89,7 @@ if button_clicked and input_file != None:
     # st.write('Audiocls predict output: ', pred_label, pred_prob, class_name[str(pred_label)])
     st.title("===*** Prediction ***===")
     st.write("Class name:", class_name[str(pred_label)])
-    st.write("Confident:",pred_post)
+    st.write("Target Class Index, Max Probability, Confident Array:",pred_post)
 
 
 
