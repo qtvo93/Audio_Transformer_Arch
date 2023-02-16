@@ -6,8 +6,8 @@ from model.htsat import HTSAT_Swin_Transformer
 import numpy as np
 import matplotlib.pyplot as plt
 
-st.header("Pretrained Audio Transformer to Classify Air Acoustic Sounds")
-st.title("Current Trained Classes:")
+st.title("Pretrained Audio Transformer to Classify Air Acoustic Sounds")
+st.header("Current Trained Classes:")
 st.write("Data from ESC-50 Dataset")
 st.image("Capture.PNG")
 
@@ -87,11 +87,11 @@ if button_clicked and input_file != None:
     Audiocls = Audio_Classification(model_path, config)       
     pred_label, pred_prob, pred_post = Audiocls.predict(input_file)
     # st.write('Audiocls predict output: ', pred_label, pred_prob, class_name[str(pred_label)])
-    st.title("===*** Prediction ***===")
+    st.header("===*** Prediction ***===")
     st.write("Class name:", class_name[str(pred_label)])
-    st.write("Target Class Index", pred_label)
-    st.write("Max Probability", pred_prob)
-    st.write("Confident Array:", pred_post)
+    st.write("Target Class Index:", pred_label)
+    st.write("Max Probability:", pred_prob)
+    st.write("Prediction Array:", pred_post)
 
 
 
