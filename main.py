@@ -34,7 +34,12 @@ class Audio_Classification:
             patch_stride=config.htsat_stride,
             num_heads=config.htsat_num_head
         )
-        ckpt = torch.load(model_path, map_location="cpu")
+        @st.cache
+        def load_model():
+            return torch.load(model_path, map_location="cpu")
+
+        ckpt = load_model()
+        # ckpt = torch.load(model_path, map_location="cpu")
         temp_ckpt = {}
         for key in ckpt["state_dict"]:
             temp_ckpt[key[10:]] = ckpt['state_dict'][key]
@@ -73,6 +78,8 @@ class Audio_Classification:
                 pred_prob = np.max(pred_post)
       
             return pred_label, pred_prob, pred_post
+        
+
 
 model_path="./trained_model/l-epoch=79-acc=0.968.ckpt"
 meta = np.loadtxt('esc50.csv' , delimiter=',', dtype='str', skiprows=1)
