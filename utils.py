@@ -10,12 +10,8 @@ from torch import Tensor
 from typing import Optional
 import logging
 import os
-import sys
 import h5py
-import csv
-import time
 import json
-import museval
 import librosa
 from datetime import datetime
 from tqdm import tqdm

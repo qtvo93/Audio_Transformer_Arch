@@ -13,5 +13,6 @@ torchsummary==1.5.1
 torchvision
 toml
 streamlit
+h5py
 
 
