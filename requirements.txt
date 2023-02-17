@@ -14,5 +14,6 @@ torchvision
 toml
 streamlit
 h5py
+tqdm
 
 
