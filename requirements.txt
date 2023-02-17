@@ -182,5 +182,4 @@ widgetsnbextension==3.6.0
 wrapt==1.13.3
 yarl==1.8.1
 zipp==3.7.0
-libsndfile1-dev
 
