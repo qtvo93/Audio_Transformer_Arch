@@ -17,6 +17,8 @@ st.write("Verify your input sound")
 st.audio(input_file)
 
 button_clicked=st.button("Visualize spectrogram and perform prediction")
+
+
 class Audio_Classification:
     def __init__(self, model_path, config):
         super().__init__()
@@ -34,12 +36,13 @@ class Audio_Classification:
             patch_stride=config.htsat_stride,
             num_heads=config.htsat_num_head
         )
-        @st.cache
+      
+        # ckpt = torch.load(model_path, map_location="cpu")
+        @st.cache_resource
         def load_model():
             return torch.load(model_path, map_location="cpu")
 
         ckpt = load_model()
-        # ckpt = torch.load(model_path, map_location="cpu")
         temp_ckpt = {}
         for key in ckpt["state_dict"]:
             temp_ckpt[key[10:]] = ckpt['state_dict'][key]
