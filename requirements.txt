@@ -15,5 +15,11 @@ toml
 streamlit
 h5py
 tqdm
+boto3
+joblib
+os
+io
+dotenv
+
 
 
