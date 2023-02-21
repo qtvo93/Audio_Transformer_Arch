@@ -1,5 +1,5 @@
 audioread
-librosa
+librosa==0.9.1
 llvmlite
 matplotlib
 matplotlib-inline
