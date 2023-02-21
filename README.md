@@ -1,6 +1,6 @@
 # Audio_Transformer_Arch
 
-## live demo: https://qtvo-audio-transformer.streamlit.app/
+## live demo: https://qtvo-audio-transformer.onrender.com
 
 ## Local setup
 1. $ git clone https://github.com/qtvo93/Audio_Transformer_Arch.git
