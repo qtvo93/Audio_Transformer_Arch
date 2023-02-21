@@ -39,7 +39,7 @@ class Audio_Classification:
         )
       
         # ckpt = torch.load(model_path, map_location="cpu")
-        @st.cache_resource
+        # @st.cache_resource
         def load_model():
             return torch.load(model_path, map_location="cpu")
 
@@ -96,6 +96,7 @@ for label in meta:
 
 if button_clicked and input_file != None:
     s3 = get_credentials()
+
     model_path = download_obj(s3)
 
     Audiocls = Audio_Classification(model_path, config)       
