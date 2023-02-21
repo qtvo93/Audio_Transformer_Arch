@@ -20,7 +20,7 @@ st.audio(input_file)
 
 button_clicked=st.button("Visualize spectrogram and perform prediction")
 
-@st.cache_resource
+@st.cache_data
 class Audio_Classification:
     def __init__(self, model_path, config):
         super().__init__()
