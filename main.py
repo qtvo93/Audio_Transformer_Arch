@@ -39,7 +39,7 @@ class Audio_Classification:
         )
       
         # ckpt = torch.load(model_path, map_location="cpu")
-        @st.cache_resource
+      
         def load_model():
             return torch.load(model_path, map_location="cpu")
 
