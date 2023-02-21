@@ -60,7 +60,7 @@ class Audio_Classification:
  
             f, ax = plt.subplots(1, 1, sharey=False, sharex=False, figsize=(8, 2))
 
-            spec = librosa.feature.melspectrogram(waveform, sr=32000, n_fft=2205, hop_length=320)
+            spec = librosa.feature.melspectrogram(y=waveform, sr=32000, n_fft=2048, hop_length=config.hop_size)
             spec = librosa.power_to_db(spec)
 
 
@@ -69,6 +69,7 @@ class Audio_Classification:
             ax.get_yaxis().set_visible(False)
             ax.get_xaxis().set_visible(False)
             f.tight_layout()
+
             st.write(f)
 
             # plt.savefig(f'{audiofile}.png', bbox_inches='tight', dpi=72)
