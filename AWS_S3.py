@@ -25,7 +25,7 @@ def get_credentials():
 
 def upload_obj(s3):
     with BytesIO() as f:
-        file = './trained_model/l-epoch=79-acc=0.968.ckpt'
+        file = 'l-epoch=79-acc=0.968.ckpt'
         joblib.dump(file, f)
         f.seek(0)
         s3.upload_fileobj(Bucket="pretrained-model-qtvo", Key="cli-l-epoch=79-acc=0.968.ckpt", Fileobj=f)
