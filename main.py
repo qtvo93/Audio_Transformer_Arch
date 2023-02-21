@@ -5,6 +5,8 @@ import torch
 from model.htsat import HTSAT_Swin_Transformer
 import numpy as np
 import matplotlib.pyplot as plt
+from AWS_S3 import *
+import pandas as pd
 
 st.title("Pretrained Audio Transformer to Classify Air Acoustic Sounds")
 st.header("Current Trained Classes:")
@@ -18,7 +20,7 @@ st.audio(input_file)
 
 button_clicked=st.button("Visualize spectrogram and perform prediction")
 
-@st.cache_data
+@st.cache_resource
 class Audio_Classification:
     def __init__(self, model_path, config):
         super().__init__()
@@ -83,8 +85,7 @@ class Audio_Classification:
             return pred_label, pred_prob, pred_post
         
 
-
-model_path="./trained_model/l-epoch=79-acc=0.968.ckpt"
+# model_path="l-epoch=79-acc=0.968.ckpt"
 meta = np.loadtxt('esc50.csv' , delimiter=',', dtype='str', skiprows=1)
 # input_file="mixkit-medium-size-angry-dog-bark-54.wav"
 class_name = {}
@@ -94,6 +95,9 @@ for label in meta:
     class_name[target]=category
 
 if button_clicked and input_file != None:
+    s3 = get_credentials()
+    model_path = download_obj(s3)
+
     Audiocls = Audio_Classification(model_path, config)       
     pred_label, pred_prob, pred_post = Audiocls.predict(input_file)
     # st.write('Audiocls predict output: ', pred_label, pred_prob, class_name[str(pred_label)])
@@ -101,7 +105,8 @@ if button_clicked and input_file != None:
     st.write("Class name:", class_name[str(pred_label)])
     st.write("Target Class Index:", pred_label)
     st.write("Max Probability:", pred_prob)
-    st.write("Prediction Array:", pred_post)
+    df = pd.DataFrame(pred_post, columns=["Prob"])
+    st.dataframe(df.style.format("{: 0.6f}"))
 
 
 
