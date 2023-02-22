@@ -18,8 +18,7 @@ tqdm
 boto3
 joblib
 python-dotenv
-pickle
-psycopg2
+psycopg2-binary 
 
 
 
