@@ -5,8 +5,19 @@ import torch
 from model.htsat import HTSAT_Swin_Transformer
 import numpy as np
 import matplotlib.pyplot as plt
-from AWS_S3 import *
+
 import pandas as pd
+import psycopg2
+from dotenv import load_dotenv
+import os
+import pickle
+from db_setup.insert_model_db import *
+
+load_dotenv()
+DB_USER= os.getenv('DB_USER')
+DB_PASSWORD= os.getenv('DB_PASSWORD')
+DB_HOST= os.getenv('DB_HOST')
+DATABASE= os.getenv('DATABASE')
 
 st.title("Pretrained Audio Transformer to Classify Air Acoustic Sounds")
 st.header("Current Trained Classes:")
@@ -39,14 +50,16 @@ class Audio_Classification:
         )
       
         # ckpt = torch.load(model_path, map_location="cpu")
-        # @st.cache_resource
+        @st.cache_resource
         def load_model():
-            return torch.load(model_path, map_location="cpu")
+            # return torch.load(model_path, map_location="cpu")
+            return model_path
 
         ckpt = load_model()
         temp_ckpt = {}
-        for key in ckpt["state_dict"]:
-            temp_ckpt[key[10:]] = ckpt['state_dict'][key]
+        # for key in ckpt["state_dict"]:
+        for key in ckpt:
+            temp_ckpt[key[10:]] = ckpt[key]
         self.sed_model.load_state_dict(temp_ckpt)
         self.sed_model.to(self.device)
         self.sed_model.eval()
@@ -86,6 +99,17 @@ class Audio_Classification:
         
 
 # model_path="l-epoch=79-acc=0.968.ckpt"
+# connection = psycopg2.connect(user=DB_USER,
+#                                 password=DB_PASSWORD,
+#                                 host=DB_HOST,
+#                                 database=DATABASE)
+
+# cursor = connection.cursor()
+# select_query = "select * from saved_model"
+# cursor.execute(select_query)
+# models = cursor.fetchall()
+# model_path = pickle.loads(models[0][2])
+
 meta = np.loadtxt('esc50.csv' , delimiter=',', dtype='str', skiprows=1)
 # input_file="mixkit-medium-size-angry-dog-bark-54.wav"
 class_name = {}
@@ -95,8 +119,9 @@ for label in meta:
     class_name[target]=category
 
 if button_clicked and input_file != None:
-    s3 = get_credentials()
 
+    
+    s3 = get_credentials()
     model_path = download_obj(s3)
 
     Audiocls = Audio_Classification(model_path, config)       
@@ -109,6 +134,9 @@ if button_clicked and input_file != None:
     df = pd.DataFrame(pred_post, columns=["Prob"])
     st.dataframe(df.style.format("{: 0.6f}"))
 
+ 
+
+    
 
 
 
