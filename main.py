@@ -1,3 +1,7 @@
+# Quoc Thinh Vo
+# Drexel University
+# Playground built from a pre-trained model for visualizing ML
+
 import streamlit as st
 import esc_config as config
 import librosa
